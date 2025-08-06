@@ -90,6 +90,60 @@
             50% { left: 100%; }
         }
 
+        .list-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .list-group-item {
+            background: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            border-radius: 15px !important;
+            margin-bottom: 0.8rem;
+            padding: 1.2rem 1.5rem;
+            color: white !important;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .list-group-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: all 0.5s;
+        }
+
+        .list-group-item:hover::before {
+            left: 100%;
+        }
+
+        .list-group-item:hover {
+            transform: translateX(10px) scale(1.02);
+            border-color: var(--glow-color) !important;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .badge {
+            background: var(--primary-gradient) !important;
+            border: none !important;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
         /* Floating particles */
         .particle {
             position: fixed;
@@ -136,37 +190,37 @@
         <div id="champions"></div>
     </div>
     <script src="meta.js"></script>
-
-   
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-    fetch('champs.json')
-        .then(response => response.json())
-        .then(data => {
-            const championsContainer = document.getElementById('champions');
-            for (const category in data) {
-                const champion = data[category];
-                const championList = document.createElement('ul');
-                championList.className = 'list-group mt-3';
-                if (typeof champion === 'object') {
-                    for (const name in champion) {
-                        const title = champion[name];
-                        const listItem = document.createElement('li');
-                        listItem.className = 'list-group-item';
-                        listItem.innerHTML = `<span class="badge text-bg-primary">BSW</span> ${name}: ${title}`;
-                        championList.appendChild(listItem);
+            fetch('champs.json')
+                .then(response => response.json())
+                .then(data => {
+                    const championsContainer = document.getElementById('champions');
+                    for (const category in data) {
+                        const champion = data[category];
+                        const championList = document.createElement('ul');
+                        championList.className = 'list-group mt-3';
+                        if (typeof champion === 'object') {
+                            for (const name in champion) {
+                                const title = champion[name];
+                                const listItem = document.createElement('li');
+                                listItem.className = 'list-group-item';
+                                listItem.innerHTML = `<span class="badge text-bg-primary">BSW</span> ${name}: ${title}`;
+                                championList.appendChild(listItem);
+                            }
+                        } else {
+                            const listItem = document.createElement('li');
+                            listItem.className = 'list-group-item';
+                            listItem.innerHTML = `<span class="badge text-bg-primary">BSW</span> ${category}: ${champion}`;
+                            championList.appendChild(listItem);
+                        }
+                        championsContainer.appendChild(championList);
                     }
-                } else {
-                    const listItem = document.createElement('li');
-                    listItem.className = 'list-group-item';
-                    listItem.innerHTML = `<span class="badge text-bg-primary">BSW</span> ${category}: ${champion}`;
-                    championList.appendChild(listItem);
-                }
-                championsContainer.appendChild(championList);
-            }
-        })
-        .catch(error => console.error(error));
+                })
+                .catch(error => console.error(error));
+        });
+
         // Create floating particles
         function createParticle() {
             const particle = document.createElement('div');
