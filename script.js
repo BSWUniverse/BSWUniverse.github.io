@@ -3,12 +3,10 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             const championsContainer = document.getElementById('champions');
-
             for (const category in data) {
                 const champion = data[category];
                 const championList = document.createElement('ul');
                 championList.className = 'list-group mt-3';
-
                 if (typeof champion === 'object') {
                     for (const name in champion) {
                         const title = champion[name];
@@ -23,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     listItem.innerHTML = `<span class="badge text-bg-primary">BSW</span> ${category}: ${champion}`;
                     championList.appendChild(listItem);
                 }
-
                 championsContainer.appendChild(championList);
             }
         })
