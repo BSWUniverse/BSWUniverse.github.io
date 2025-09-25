@@ -492,23 +492,21 @@
           <div class="section-title">🎭 Character Identity</div>
           
           <label for="ringname">Ring Name:</label>
-          <input type="text" id="ringname" name="ringname" required>
+          <input type="text" id="ringname" placeholder="Your Ring Name" name="ringname" required>
 
           <label for="nickname">Nicknames:</label>
-          <input type="text" id="nickname" name="nickname">
+          <input type="text" id="nickname" name="nickname" placeholder="Your Nickname">
 
           <label for="streamname">Twitch or Kick Name (for streams):</label>
-          <input type="text" id="streamname" name="streamname">
+          <input type="text" id="streamname" name="streamname" placeholder="https://twitch.tv/username or https://kick.com/username">
 
-          <label for="catchphrase">Catchphrase:</label>
-          <input type="text" id="catchphrase" name="catchphrase">
         </div>
 
         <div class="form-section">
           <div class="section-title">📊 Physical Stats</div>
           
           <label for="age">Age:</label>
-          <input type="number" id="age" name="age" min="10" max="99">
+          <input type="number" id="age" name="age" min="10" max="99" placeholder="Your Age" >
 
           <label for="hometown">Hometown:</label>
           <input type="text" id="hometown" name="hometown">
@@ -532,18 +530,7 @@
           </select>
         </div>
 
-        <div class="form-section">
-          <div class="section-title">🎨 Visual Design</div>
-          
-          <label for="attire">Attire Description:</label>
-          <textarea id="attire" name="attire" placeholder="Describe your wrestler's in-ring attire..."></textarea>
 
-          <label for="entranceattire">Entrance Attire:</label>
-          <textarea id="entranceattire" name="entranceattire" placeholder="Special entrance gear, robes, masks, etc..."></textarea>
-
-          <label for="signaturecolors">Signature Colors/Theme:</label>
-          <input type="text" id="signaturecolors" name="signaturecolors" placeholder="e.g., Black & Gold, Neon Green, etc.">
-        </div>
 
         <div class="form-section">
           <div class="section-title">🥊 Wrestling Style & Moves</div>
@@ -586,36 +573,10 @@
           <textarea id="gimmick" name="gimmick" placeholder="Describe your wrestler's character, personality, and gimmick..."></textarea>
 
           <label for="theme">Entrance Theme Song:</label>
-          <input type="text" id="theme" name="theme" placeholder="Song title or description">
+          <input type="text" id="theme" name="theme" placeholder="Song title or description has to be with in wwe2k25">
 
-          <label for="taunts">Taunts/Poses:</label>
-          <textarea id="taunts" name="taunts" placeholder="Signature taunts, poses, or gestures..."></textarea>
 
-          <label for="strengths">Strengths in Matches:</label>
-          <textarea id="strengths" name="strengths" placeholder="What your wrestler excels at..."></textarea>
-
-          <label for="weaknesses">Weaknesses in Matches:</label>
-          <textarea id="weaknesses" name="weaknesses" placeholder="Areas where your wrestler struggles..."></textarea>
-        </div>
-
-        <div class="form-section">
-          <div class="section-title">🤝 Relationships & Goals</div>
-          
-          <label for="alliances">Alliances / Managers:</label>
-          <input type="text" id="alliances" name="alliances" placeholder="Tag team partners, stables, managers...">
-
-          <label for="rivalries">Rivalries / Enemies:</label>
-          <input type="text" id="rivalries" name="rivalries" placeholder="Current or potential rivals...">
-
-          <label for="titlegoals">Preferred Title Goals:</label>
-          <input type="text" id="titlegoals" name="titlegoals" placeholder="Which championships to pursue...">
-
-          <label for="social">Social Media Handles (optional):</label>
-          <input type="text" id="social" name="social" placeholder="Twitter, Instagram, etc.">
-
-          <label for="extranotes">Any Extra Notes for Commentary or Promos:</label>
-          <textarea id="extranotes" name="extranotes" placeholder="Additional details, backstory, or special notes..."></textarea>
-        </div>
+  
       </div>
 
       <div class="submit-container">
@@ -653,14 +614,13 @@
         title: `🥊 New Wrestler Profile: ${data.ringname || 'Unknown'}`,
         color: 0xff4040, // Red color
         thumbnail: {
-          url: "https://i.imgur.com/wrestling-icon.png" // You can replace with actual icon
+          url: "https://r2.fivemanage.com/TUppkHSOByRILTYhWVarA/bsw.png" // You can replace with actual icon
         },
         fields: [
           {
             name: "🎭 Character Info",
             value: `**Ring Name:** ${data.ringname || 'N/A'}
 **Nickname:** ${data.nickname || 'N/A'}
-**Real Name:** ${data.realname || 'N/A'}
 **Stream Name:** ${data.streamname || 'N/A'}
 **Catchphrase:** ${data.catchphrase || 'N/A'}`,
             inline: false
@@ -682,54 +642,29 @@
 **Secondary Traits:** ${data.traits || 'N/A'}`,
             inline: true
           },
-          {
-            name: "🎨 Visual Design",
-            value: `**Signature Colors:** ${data.signaturecolors || 'N/A'}
-**Attire:** ${data.attire ? (data.attire.length > 100 ? data.attire.substring(0, 100) + '...' : data.attire) : 'N/A'}`,
-            inline: false
-          },
+
           {
             name: "🎪 Character & Moves",
             value: `**Entrance Theme:** ${data.theme || 'N/A'}
 **Finisher(s):** ${data.finisher ? (data.finisher.length > 150 ? data.finisher.substring(0, 150) + '...' : data.finisher) : 'N/A'}`,
             inline: false
           },
-          {
-            name: "🤝 Relationships & Goals",
-            value: `**Title Goals:** ${data.titlegoals || 'N/A'}
-**Alliances:** ${data.alliances || 'N/A'}
-**Rivalries:** ${data.rivalries || 'N/A'}`,
-            inline: false
-          }
         ],
         footer: {
           text: "BSW E-Fed Universe • WWE 2K25",
-          icon_url: "https://i.imgur.com/wrestling-small-icon.png"
+          icon_url: "https://r2.fivemanage.com/TUppkHSOByRILTYhWVarA/bsw.png"
         },
         timestamp: new Date().toISOString()
       };
       
-      // Add additional fields if they have content
-      if (data.gimmick && data.gimmick.trim()) {
-        embed.fields.push({
-          name: "💭 Character Concept",
-          value: data.gimmick.length > 200 ? data.gimmick.substring(0, 200) + '...' : data.gimmick,
-          inline: false
-        });
-      }
+
       
-      if (data.extranotes && data.extranotes.trim()) {
-        embed.fields.push({
-          name: "📝 Additional Notes",
-          value: data.extranotes.length > 200 ? data.extranotes.substring(0, 200) + '...' : data.extranotes,
-          inline: false
-        });
-      }
+
       
       const payload = {
         embeds: [embed],
         username: "BSW Wrestler Creator",
-        avatar_url: "https://i.imgur.com/wrestling-bot-avatar.png"
+        avatar_url: "https://r2.fivemanage.com/TUppkHSOByRILTYhWVarA/bsw.png"
       };
       
       try {
